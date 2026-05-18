@@ -652,12 +652,14 @@
     align-items: center;
     margin-bottom: 12px;
   }
+  .mission-head > .mission-text { min-width: 0; }
   .mission-icon {
     font-size: 29px;
     width: 44px; height: 44px;
     background: var(--tint);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
   }
   .mission-title {
     font-weight: 700;
@@ -1116,6 +1118,62 @@
     .toggle-btn { padding: 7px 12px; font-size: 16px; }
     .faq-q { padding: 18px 20px; font-size: 19px; }
     .faq-a-inner { padding: 0 20px 20px 48px; font-size: 18.5px; }
+
+    /* 환경캠페인 — 미션 카드 모바일 레이아웃 */
+    .mission-card { padding: 16px; }
+    .mission-head {
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "icon points"
+        "text text";
+      gap: 12px;
+      align-items: center;
+    }
+    .mission-icon { grid-area: icon; width: 40px; height: 40px; font-size: 26px; }
+    .mission-points { grid-area: points; justify-self: end; font-size: 26px; padding: 6px 12px; }
+    .mission-points span { font-size: 15px; }
+    .mission-text {
+      grid-area: text;
+      min-width: 0;
+      padding-top: 4px;
+      border-top: 1px dashed var(--tint-deep);
+    }
+    .mission-title { font-size: 19px; line-height: 1.35; word-break: keep-all; }
+    .mission-where { display: inline-block; margin-left: 4px; font-size: 15px; }
+    .mission-summary { font-size: 16.5px; margin-top: 4px; word-break: keep-all; }
+
+    /* 점수 구성 strip — 한 줄 유지 + 폰트 축소 */
+    .points-strip { padding: 14px 10px; gap: 4px; }
+    .ps-item { min-width: 0; }
+    .ps-num { font-size: 22px; }
+    .ps-total .ps-num { font-size: 25px; }
+    .ps-lab { font-size: 13px; }
+    .ps-op { font-size: 14px; }
+
+    /* H2 미션 섹션 패딩 축소 */
+    .h2-section { padding: 16px 14px; }
+    .h2-intro { font-size: 16px; padding: 0; }
+    .mission-checks li { font-size: 16.5px; word-break: keep-all; }
+
+    /* callout 내부 강조구 줄바꿈 허용 (overflow 방지) */
+    .callout { padding: 18px 18px; }
+    .callout li, .callout li strong { word-break: keep-all; overflow-wrap: anywhere; }
+    .callout li strong { display: inline; }
+
+    /* 종이팩 배너 */
+    .recycle-banner { padding: 24px 20px; }
+    .recycle-purpose { font-size: 16.5px; padding: 14px 16px; }
+    .recycle-banner p { font-size: 16.5px; word-break: keep-all; }
+
+    /* 로드맵 카드 모바일 — 1열 세로 흐름 */
+    .roadmap-step { padding: 14px 12px; }
+    .rs-title { font-size: 16px; }
+    .rs-desc { font-size: 14px; }
+    .rs-tag { font-size: 13.5px; }
+
+    /* 마라톤·매장 등 아이템 카드 — 텍스트 줄바꿈 보강 */
+    .item-title, .item-meta { word-break: keep-all; overflow-wrap: anywhere; }
+    .item-link { white-space: nowrap; }
   }
 </style>
 </head>
@@ -1271,7 +1329,7 @@ window.SITE_DATA = {
       name: "아름다운가게 개봉점",
       addr: "서울 구로구 경인로 334 (개봉동 하이마트 1층)",
       phone: "1577-1113",
-      link: "https://share.beautifulstore.org/",
+      link: "https://www.beautifulstore.org/storeinfo?id=453",
       tag: "회사 인근",
       recommend: true,
     },
@@ -1279,41 +1337,41 @@ window.SITE_DATA = {
       name: "아름다운가게 광명하안점",
       addr: "경기 광명시 (광명하안점)",
       phone: "1577-1113",
-      link: "https://share.beautifulstore.org/",
+      link: "https://www.beautifulstore.org/",
       tag: "회사 인근",
       recommend: true,
     },
     {
       name: "지파운데이션 나눔가게 홍대점",
       addr: "서울 마포구 (홍대점)",
-      phone: "02-336-0506",
-      link: "https://www.gfound.org/page.php?Main=1&sub=11&tab=8",
+      phone: "공식홈 참고",
+      link: "https://www.gfound.org",
     },
     {
-      name: "지파운데이션 나눔가게 부천점",
-      addr: "부천시 원미구 (부천점)",
-      phone: "0507-1302-9712",
-      link: "https://www.gfound.org/page.php?Main=1&sub=11&tab=8",
+      name: "지파운데이션 나눔가게 마곡점",
+      addr: "서울 강서구 (마곡점)",
+      phone: "공식홈 참고",
+      link: "https://www.gfound.org",
     },
   ],
 
   /* 헌혈센터 (헌혈의 집 = 대한적십자사 / 헌혈카페 = 한마음혈액원) */
   bloodCenters: [
     {
-      name: "헌혈의 집 광명센터",
+      name: "헌혈의 집 구로디지털단지역센터",
       operator: "대한적십자사 운영",
-      addr: "경기 광명시 철산로 20 야우리빌딩 3층 302호 (철산역1번출구)",
-      hours: "평일 10:00 ~ 19:00 / 주말·공휴일 휴무",
-      reserve: "https://map.naver.com/p/entry/place/1638410528?placePath=%2Fhome",
+      addr: "구로구 디지털로 일대 (구로디지털단지역 인근)",
+      hours: "평일 10:00 ~ 20:00 / 주말·공휴일 10:00 ~ 18:00",
+      reserve: "https://bloodinfo.net",
       tag: "회사 인근",
       recommend: true,
     },
     {
-      name: "헌혈의 집 구로디지털단지역센터",
-      operator: "대한적십자사 운영",
-      addr: "서울 관악구 시흥대로 576 2층 헌혈의집 구로디지털단지역센터 (구로디지털단지역1번출구)",
-      hours: "평일 10:00 ~ 20:00 / 주말·공휴일 10:00 ~ 18:00",
-      reserve: "https://map.naver.com/p/entry/place/13481205?placePath=%2Fhome",
+      name: "헌혈카페 구로디지털단지역점",
+      operator: "한마음혈액원 운영",
+      addr: "구로디지털단지역 인근",
+      hours: "지점 공지 참고",
+      reserve: "https://www.bloodnet.or.kr",
       tag: "회사 인근",
       recommend: true,
     },
@@ -1331,6 +1389,7 @@ window.SITE_DATA = {
         "타임스탬프 앱으로 날짜가 표시된 텀블러 인증샷 촬영",
         "본인이 직접 사용 중인 사진 (컵 내부가 보이도록, 얼굴 일부만 나오거나 스티커로 가려도 OK)",
         "전일휴가·전일외근·출장일은 Working Day에서 제외",
+        "Q1: 인증샷 7회 제출 / Q2: 인증샷 10회 제출",
       ],
     },
     {
@@ -1341,7 +1400,6 @@ window.SITE_DATA = {
       summary: "플라스틱, 종이, 비닐 등을 주 1회 분리배출하고 인증샷 제출",
       details: [
         "집에서 분리하는 모습, 분리수거장에서 버리는 모습 등 일상 속 활동이면 OK",
-        "Q1: 인증샷 7회 제출 / Q2: 인증샷 10회 제출"
       ],
     },
     {
@@ -1420,7 +1478,7 @@ window.SITE_DATA = {
     },
     {
       q: "매칭 기부금은 언제, 어떻게 집행되나요?",
-      a: "구성원의 활동별 매칭 금액은 연말에 일괄 집계되어, <strong>드림앤비젼 펀딩 모금액</strong>과 함께 금천구 내 소외계층 아동·청년 지원사업으로 일시 전달됩니다. (전달 채널: 굿네이버스 서울서부지부)",
+      a: "구성원의 활동별 매칭 금액은 연말에 일괄 집계되어, <strong>드림앤비젼 펀딩 모금액</strong>과 함께 금천구 내 취약계층 지원사업으로 일시 전달됩니다. (전달 채널: 굿네이버스 서울서부지부)",
     },
     {
       q: "증빙 자료는 언제까지 제출해야 하나요?",
@@ -1463,7 +1521,7 @@ window.SITE_DATA = {
 
     <p class="lead">
       마라톤 완주, 봉사활동, 헌혈, 물품기부, 환경캠페인. 일상 속 작은 실천을
-      회사가 함께 매칭합니다. <strong>구성원의 시간과 마음을 모아 금천구 소외계층 아동·청년에게 전달되는</strong>
+      회사가 함께 매칭합니다. <strong>구성원의 시간과 마음을 모아 금천구 내 취약계층에게 전달되는</strong>
       비금전적 참여형 기부 프로그램입니다. 11월까지, 함께해주세요.
     </p>
   </div>
@@ -1478,7 +1536,7 @@ window.SITE_DATA = {
     </div>
     <div class="stat">
       <div class="label">BENEFICIARY · 기부처</div>
-      <div class="val">금천구 소외계층<br>아동·청년 지원사업</div>
+      <div class="val">금천구 취약계층<br> 지원사업</div>
       <div class="sub">전달 · 굿네이버스 서울서부지부</div>
     </div>
     <div class="stat">
@@ -1515,7 +1573,7 @@ window.SITE_DATA = {
           종이팩 1톤이면 약 <strong>30년생 나무 20그루</strong>를 지킬 수 있어요.
         </div>
         <p style="margin-top: 16px;">
-          다 마신 <strong>우유팩·음료팩(멸균팩 제외)</strong>을 깨끗이 헹궈서 펼친 뒤 허브 건조대에 모아주세요.
+          다 마신 <strong>우유팩·음료팩(멸균팩 포함)</strong>을 깨끗이 헹궈서 펼친 뒤 사내 수거함에 모아주세요.
           모인 종이팩은 자원순환 협력처로 전달되어 <strong>화장지·종이타월 등</strong>으로 다시 우리 일상에 돌아옵니다.
           별도 매칭 점수는 없지만, 일상 속에서 가장 쉽게 실천할 수 있는 환경 보호 활동입니다.
         </p>
@@ -1530,7 +1588,7 @@ window.SITE_DATA = {
       <div class="left">
         <div class="label">SUBMIT · 증빙 제출</div>
         <h3>활동 인증서·완주증·기부내역서·헌혈증<br>한 곳으로 보내주세요</h3>
-        <p>활동 종료 후 바로바로 보내주세요 · <strong style="color: var(--amber);">헌혈증만 원본 제출</strong>, 그 외는 스캔본·사진본 가능</p>
+        <p>활동 종료 후 가능한 빨리 제출해 주세요 · <strong style="color: var(--amber);">헌혈증만 원본 제출</strong>, 그 외는 스캔본·사진본 가능</p>
       </div>
       <div class="email">gwp@envision.co.kr →</div>
     </a>
@@ -1610,8 +1668,8 @@ window.SITE_DATA = {
       ], summary: ['1개당 <strong>10만원</strong>'] },
     { rates: [
         ['상반기 성공 (누적 80점 이상)', '샴푸바 3종 수령'],
-        ['하반기 성공', '10만원 상당 기념품 또는 매칭 기부(인당 20만원)'],
-      ], summary: ['상반기 <strong>샴푸바 3종</strong>', '하반기 <strong>10만원 상당 기념품 또는 매칭 기부(인당 20만원)</strong>'] },
+        ['하반기 성공', '일대일 매칭 기부 (인당 20만원)'],
+      ], summary: ['상반기 <strong>샴푸바 3종</strong>', '하반기 <strong>일대일 매칭 기부 (인당 20만원)</strong>'] },
   ];
 
   // 카드 정의
@@ -1643,7 +1701,7 @@ window.SITE_DATA = {
     {
       icon: '🌱',
       name: "환경보호 캠페인 ‘기부’ 옵션",
-      desc: '분기별 점수를 누적하여 하반기 미션까지 성공한 구성원 대상 ‘기부’ 선택 시 매칭 기부금을 적립.',
+      desc: '분기별 점수를 누적하여 하반기 미션까지 성공한 구성원에게 일대일 매칭 기부금을 적립.',
       detailRender: renderEnvDetail,
       span2: true,
     },
@@ -1784,7 +1842,7 @@ window.SITE_DATA = {
           </div>
         </div>
         <div class="item-action">
-          <a class="item-link" href="${s.link}" target="_blank" rel="noopener">공식 홈페이지→</a>
+          <a class="item-link" href="${s.link}" target="_blank" rel="noopener">매장 정보 →</a>
         </div>
       </div>`).join('');
 
@@ -1796,7 +1854,7 @@ window.SITE_DATA = {
       <div class="callout">
         <h5>📌 기부 방법</h5>
         <ul>
-          <li><strong>소량 물품</strong>: 매장 직접 방문 기부 또는 택배 기부</li>
+          <li><strong>소량 물품</strong>: 매장 직접 방문 기부</li>
           <li><strong>3박스 이상</strong>: 방문수거 신청 가능 (아름다운가게 ☎ 1577-1113 또는 홈페이지)</li>
           <li>포장 규격: 우체국 5호 박스 또는 종량제 50L 봉투, 박스당 <strong>15kg 이내</strong></li>
           <li><strong>기부영수증은 본인 정보 정확히 기재 시에만 발급</strong> — 익명 발송은 영수증 미발급되어 매칭 산정 불가</li>
@@ -1826,7 +1884,7 @@ window.SITE_DATA = {
 
     return `
       <div class="detail-section">
-        <h4>회사 인근 헌혈의 집 <span class="small">NEAR THE OFFICE</span></h4>
+        <h4>회사 인근 헌혈의 집 · 헌혈카페 <span class="small">NEAR THE OFFICE</span></h4>
         <div class="item-list">${centersHTML}</div>
       </div>
       <div class="detail-section">
@@ -1943,8 +2001,8 @@ window.SITE_DATA = {
       <div class="callout" style="margin-top: 16px; background: #1F4D2E;">
         <h5 style="color: #B7E4C7;">💚 NEW · 일대일 매칭 기부</h5>
         <ul>
-          <li>하반기까지 성공한 구성원 대상 <strong> '기부'옵션 선택 시 회사가 일대일 매칭하여 인당 20만원</strong>의 기부금이 적립됩니다.</li>
-          <li>적립된 기부금은 연말에 <strong>국내 소외계층 지원사업</strong>으로 전달됩니다.</li>
+          <li>하반기까지 성공한 구성원에게는 <strong>회사가 일대일 매칭하여 인당 20만원</strong>의 기부금이 적립됩니다.</li>
+          <li>적립된 기부금은 연말에 <strong>국내 취약계층 지원사업</strong>으로 전달됩니다.</li>
         </ul>
       </div>
     `;
