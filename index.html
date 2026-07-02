@@ -354,7 +354,7 @@
     overflow: hidden;
     transition: max-height 0.5s ease;
   }
-  .activity.open .activity-detail { max-height: 5000px; }
+  .activity.open .activity-detail { max-height: 12000px; }
   .activity-detail-inner { padding: 28px 30px 32px; }
 
   .detail-section { margin-bottom: 28px; }
@@ -755,6 +755,158 @@
     color: var(--amber);
   }
 
+  /* H2 announced mission cards (Q3/Q4 breakdown) */
+  .hm-card {
+    background: var(--paper-soft);
+    border: 1px solid var(--amber);
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .hm-card.is-new {
+    border-color: var(--coral);
+    background: linear-gradient(135deg, rgba(201, 83, 60, 0.05) 0%, var(--paper-soft) 55%);
+  }
+  .hm-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .hm-icon {
+    font-size: 26px;
+    width: 44px; height: 44px;
+    background: rgba(216, 154, 58, 0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .hm-card.is-new .hm-icon { background: rgba(201, 83, 60, 0.12); }
+  .hm-body { min-width: 0; flex: 1; }
+  .hm-title {
+    font-weight: 700;
+    font-size: 21px;
+    color: var(--navy);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .hm-new {
+    display: inline-block;
+    background: var(--coral);
+    color: var(--paper);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 7px;
+    vertical-align: middle;
+  }
+  .hm-where {
+    font-weight: 400;
+    font-size: 16.5px;
+    color: var(--mute);
+    margin-left: 4px;
+  }
+  .hm-req {
+    font-size: 18.5px;
+    color: var(--mute);
+    line-height: 1.5;
+  }
+  .q-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--tint-deep);
+  }
+  .q-box {
+    background: var(--tint);
+    border-radius: 6px;
+    padding: 12px 14px;
+  }
+  .q-box.q4 { background: rgba(216, 154, 58, 0.14); }
+  .q-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .q-name {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    color: var(--royal);
+  }
+  .q-box.q4 .q-name { color: var(--amber); }
+  .q-pts {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 21px;
+    color: var(--coral);
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .q-pts span {
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .q-req {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .hm-example {
+    margin-top: 12px;
+    font-size: 17px;
+    color: var(--ink);
+    background: rgba(255, 235, 130, 0.25);
+    border-left: 3px solid var(--amber);
+    padding: 9px 13px;
+    border-radius: 4px;
+    line-height: 1.55;
+  }
+  .hm-example strong { color: var(--navy); font-weight: 700; }
+
+  /* Collapsible past-section (상반기 미션 접기) */
+  .collapse-sec { margin-bottom: 28px; }
+  .collapse-sec > summary {
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 18px;
+    letter-spacing: 0.22em;
+    color: var(--royal);
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--tint-deep);
+    transition: color 0.2s ease;
+  }
+  .collapse-sec > summary::-webkit-details-marker { display: none; }
+  .collapse-sec > summary:hover { color: var(--coral); }
+  .collapse-sec > summary .small {
+    font-weight: 400;
+    color: var(--mute);
+    letter-spacing: 0.1em;
+    font-size: 16px;
+    margin-left: 8px;
+  }
+  .collapse-sec > summary::after {
+    content: '▾ 펼치기';
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--coral);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .collapse-sec[open] > summary::after { content: '▴ 접기'; }
+  .collapse-sec .collapse-body { margin-top: 14px; }
+
   /* Roadmap */
   .roadmap {
     display: grid;
@@ -1092,7 +1244,20 @@
     footer .container { grid-template-columns: 1fr; gap: 28px; }
     .chip-grid { grid-template-columns: 1fr; }
     .roadmap { grid-template-columns: 1fr; }
-    .roadmap-arrow { transform: rotate(90deg); padding: 4px 0; }
+    .roadmap-arrow {
+      transform: none;
+      justify-self: center;
+      align-self: center;
+      padding: 2px 0;
+      font-size: 0;
+      line-height: 1;
+    }
+    .roadmap-arrow::before {
+      content: '↓';
+      display: block;
+      font-size: 22px;
+      color: var(--mute);
+    }
     .points-strip { padding: 18px; }
     .ps-num { font-size: 25px; }
     .ps-total .ps-num { font-size: 29px; }
@@ -1153,6 +1318,14 @@
     .h2-section { padding: 16px 14px; }
     .h2-intro { font-size: 16px; padding: 0; }
     .mission-checks li { font-size: 16.5px; word-break: keep-all; }
+
+    /* 하반기 공지 미션 카드 — 모바일 */
+    .hm-card { padding: 16px; }
+    .hm-title { font-size: 19px; word-break: keep-all; }
+    .hm-req { font-size: 16.5px; word-break: keep-all; }
+    .q-split { grid-template-columns: 1fr; gap: 8px; }
+    .q-req { font-size: 16px; word-break: keep-all; }
+    .hm-example { font-size: 16px; word-break: keep-all; }
 
     /* callout 내부 강조구 줄바꿈 허용 (overflow 방지) */
     .callout { padding: 18px 18px; }
@@ -1421,34 +1594,71 @@ window.SITE_DATA = {
   envRoadmap: [
     { icon: "🌱", title: "Q1 · Q2", desc: "분기별 미션 수행 (분기당 최대 100점)", tag: "점수 누적 시작" },
     { icon: "🎁", title: "상반기 성공", desc: "누적 80점 이상", tag: "샴푸바 3종 또는 하반기 도전" },
-    { icon: "🔥", title: "하반기 계속", desc: "추가 미션 수행 — 끝까지!", tag: "일대일 매칭 기부 (20만원)" },
+    { icon: "🔥", title: "하반기 계속", desc: "하반기 미션 누적 80점 이상 — 끝까지!", tag: "일대일 매칭 기부 (20만원)" },
     { icon: "🏆", title: "연말 시상", desc: "Q1 ~ Q4 총 점수 누적 후 상위 Top 3 선정", tag: "후보 등록 조건: 최소 일상 미션 2개 이상 성공" },
   ],
 
-  /* 환경캠페인 — 하반기 추가 미션 */
+  /* 환경캠페인 — 하반기(Q3·Q4) 공지 미션
+     · 상반기 3개 미션은 하반기에도 이어지며 Q3/Q4 점수가 새로 책정됨
+     · isNew:true 인 2개 미션(환경보호 외부활동 / 물품 나눔·기부)이 하반기 신규 추가 */
   envMissionsH2: [
     {
-      icon: "🌳",
-      title: "환경보호 관련 외부활동",
-      points: 40,
-      frequency: "분기에 1회 이상",
-      summary: "야외에서 직접 실천하는 환경보호 활동에 참여하고 인증",
+      icon: "☕",
+      title: "텀블러 사용 인증샷",
+      where: "회사에서",
+      isNew: false,
+      req: "Working Day 기준 텀블러 사용 인증샷 85% 이상 제출 시 달성",
+      q3: { req: "Q3 기간 내 미션 성공 시", points: 30 },
+      q4: { req: "Q4 기간 내 미션 성공 시", points: 20 },
       details: [
-        "활동 <strong>전 과정 확인이 가능한 타임스탬프 인증샷 (활동 전 / 중 / 후)</strong> 포함 제출",
-        "예시 — 플로깅(쓰레기 줍기 + 조깅), 나무 심기, 해변·하천 정화, 도시 가드닝 등",
+        "타임스탬프 앱을 활용해 날짜가 표시된 텀블러 인증샷 촬영",
+        "본인이 직접 텀블러를 사용 중인 사진 (컵 내부가 보이도록)",
+        "전일 휴가/외근·국내외 출장일은 Working Day 일수에서 제외",
       ],
     },
     {
-      icon: "📦",
-      title: "무료나눔 & 물품기부",
-      points: 40,
-      frequency: "분기에 3회 이상",
-      summary: "재사용 가능한 물건·도서 등을 무료나눔 또는 물품기부",
+      icon: "♻️",
+      title: "가정에서 분리배출",
+      where: "일상 생활에서",
+      isNew: false,
+      req: "주 1회 분리배출한 인증샷 제출",
+      q3: { req: "Q3 기간 내 인증샷 10회 이상 제출", points: 40 },
+      q4: { req: "Q4 기간 내 인증샷 5회 이상 제출", points: 30 },
+      details: [],
+    },
+    {
+      icon: "⚡",
+      title: "가정에서 전기절약",
+      where: "일상 생활에서",
+      isNew: false,
+      req: "전년 동월 대비 올해 전기사용량 평균 10% 이상 절감",
+      q3: { req: "Q3 7~9월 3개월 전기 사용량 내역 제출", points: 40 },
+      q4: { req: "Q4 10월 한 달 전기 사용량 내역 제출", points: 30 },
       details: [
-        "물건·도서 등 <strong>재사용 가능한 품목</strong>이 대상",
-        "<strong>본인확인이 가능한 나눔·기부 내역</strong>과 <strong>품목 내용 설명</strong>을 함께 제출",
-        "<strong>당근마켓 무료나눔 인정</strong>",
+        "한전ON 앱, 전기세 고지서, 아파트 관리비 내역 등 확인 가능한 자료면 OK",
       ],
+    },
+    {
+      icon: "🌳",
+      title: "환경보호 관련 외부 활동",
+      where: "일상 생활에서",
+      isNew: true,
+      req: "분기 1회 이상, 활동 전 과정(전/중/후) 타임스탬프 인증샷 제출",
+      q3: { req: "Q3 7~9월 내 1회 이상 활동내역 제출", points: 40 },
+      q4: { req: "Q4 기간 내 1회 이상 활동내역 제출", points: 50 },
+      example: "플로깅 활동 인증샷 제출 or 환경단체 프로그램 참여 인증샷 제출",
+      details: [],
+    },
+    {
+      icon: "📦",
+      title: "물품 나눔 & 기부 활동",
+      where: "일상 생활에서",
+      isNew: true,
+      req: "분기 3회 이상, 나눔/기부 증빙자료 & 물품내역 제출",
+      q3: { req: "Q3 7~9월 내 3회 이상 활동내역 제출", points: 40 },
+      q4: { req: "Q4 기간 내 3회 이상 활동내역 제출", points: 50 },
+      example: "당근마켓 무료나눔 3회 인증 제출",
+      details: [],
     },
   ],
 
@@ -1472,7 +1682,7 @@ window.SITE_DATA = {
     },
     {
       q: "당근마켓 무료나눔도 물품기부로 인정되나요?",
-      a: "무료나눔은 기부금영수증이 발급되지 않아 매칭 산정 기준에 부합하지 않습니다. 다만 좋은 자원순환 활동이므로, <strong>하반기 환경보호 캠페인 미션 활동으로 추가될 예정</strong>입니다.",
+      a: "무료나눔은 기부금영수증이 발급되지 않아 물품기부 매칭 산정 기준에는 부합하지 않습니다. 다만 좋은 자원순환 활동이므로, <strong>하반기 환경보호 캠페인 '물품 나눔 & 기부 활동' 미션으로 참여 가능</strong>합니다. (예: 당근마켓 무료나눔 분기 3회 인증 제출)",
     },
     {
       q: "헌혈증은 원본을 제출해야 하나요?",
@@ -1669,8 +1879,8 @@ window.SITE_DATA = {
         ['헌혈증 1장당', '10만원'],
       ], summary: ['1장당 <strong>10만원</strong>'] },
     { rates: [
-        ['하반기 미션 성공 시', '일대일 매칭 기부 (인당 20만원)'],
-      ], summary: ['하반기 성공 시 <strong>일대일 매칭 기부 (인당 20만원)</strong>'] },
+        ['상하반기 미션 성공 시', '일대일 매칭 기부 (인당 20만원)'],
+      ], summary: ['상하반기 성공 시 <strong>일대일 매칭 기부 (인당 20만원)</strong>'] },
   ];
 
   // 카드 정의
@@ -1861,7 +2071,7 @@ window.SITE_DATA = {
           <li><strong>기부영수증은 본인 정보 정확히 기재 시에만 발급</strong> — 익명 발송은 영수증 미발급되어 매칭 산정 불가</li>
           <li>매칭 산정 기준: <strong>참여 시 기본 10만원 매칭</strong>, 영수증 발급 금액이 <strong>10만원 초과 시 영수증 금액으로 매칭</strong></li>
           <li>위 4개 매장 외에도 <strong>기부금영수증 발급 가능한 기부처</strong>는 모두 인정됩니다 (옷캔, 굿윌스토어 등)</li>
-          <li><strong>당근마켓 무료나눔</strong>은 영수증 발급이 안 되어 본 매칭으로는 인정되지 않으나, <strong>하반기 환경보호 캠페인 미션</strong>으로 추가될 예정입니다 (FAQ 참고)</li>
+          <li><strong>당근마켓 무료나눔</strong>은 영수증 발급이 안 되어 본 매칭으로는 인정되지 않으나, <strong>하반기 환경보호 캠페인 미션</strong>으로 참여 가능합니다. (FAQ 참고)</li>
         </ul>
       </div>
     `;
@@ -1941,18 +2151,17 @@ window.SITE_DATA = {
         </ul>
       </div>`).join('');
 
-    // 점수 합산 헤더
+    // 점수 합산 헤더 — 하반기(Q3·Q4) 기준
+    // Q3 최대 30+40+40+40+40=190 / Q4 최대 20+30+30+50+50=180 / 성공 기준 누적 80점
     const totalHTML = `
       <div class="points-strip">
-        <div class="ps-item"><span class="ps-num">20</span><span class="ps-lab">텀블러</span></div>
-        <div class="ps-op">+</div>
-        <div class="ps-item"><span class="ps-num">40</span><span class="ps-lab">분리배출</span></div>
-        <div class="ps-op">+</div>
-        <div class="ps-item"><span class="ps-num">40</span><span class="ps-lab">전기절약</span></div>
-        <div class="ps-op">=</div>
-        <div class="ps-item ps-total"><span class="ps-num">100</span><span class="ps-lab">분기당 총점</span></div>
+        <div class="ps-item"><span class="ps-num">190</span><span class="ps-lab">Q3 최대</span></div>
+        <div class="ps-op">·</div>
+        <div class="ps-item"><span class="ps-num">180</span><span class="ps-lab">Q4 최대</span></div>
+        <div class="ps-op">→</div>
+        <div class="ps-item ps-total"><span class="ps-num">80</span><span class="ps-lab">성공 기준(누적)</span></div>
       </div>
-      <p class="env-tip">💡 활동 미션을 확인하고 <strong>1가지 미션이라도 할 수 있는 미션부터 참여</strong>하고, 분기별로 점수를 누적해 보세요!</p>
+      <p class="env-tip">💡 5가지 미션 중 <strong>할 수 있는 미션부터 참여</strong>해 점수를 누적해 보세요. <strong>하반기 누적 80점 이상</strong>이면 미션 성공입니다!</p>
     `;
 
     // 리워드 로드맵
@@ -1966,39 +2175,47 @@ window.SITE_DATA = {
       ${i < D.envRoadmap.length - 1 ? '<div class="roadmap-arrow">→</div>' : ''}
     `).join('');
 
-    // 하반기 추가 미션 카드 (상반기 미션 카드와 동일한 스타일)
+    // 하반기(Q3·Q4) 공지 미션 카드 — 미션별 분기 점수 표시
     const h2MissionsHTML = D.envMissionsH2.map(m => `
-      <div class="mission-card h2-mission">
-        <div class="mission-head">
-          <div class="mission-icon">${m.icon}</div>
-          <div class="mission-text">
-            <div class="mission-title">${m.title} <span class="mission-where">📅 ${m.frequency}</span></div>
-            <div class="mission-summary">${m.summary}</div>
+      <div class="hm-card${m.isNew ? ' is-new' : ''}">
+        <div class="hm-head">
+          <div class="hm-icon">${m.icon}</div>
+          <div class="hm-body">
+            <div class="hm-title">${m.isNew ? '<span class="hm-new">NEW</span>' : ''}${m.title} <span class="hm-where">📍 ${m.where}</span></div>
+            <div class="hm-req">${m.req}</div>
           </div>
-          <div class="mission-points">${m.points}<span>점</span></div>
         </div>
-        <ul class="mission-checks">
-          ${m.details.map(d => `<li>${d}</li>`).join('')}
-        </ul>
+        <div class="q-split">
+          <div class="q-box q3">
+            <div class="q-head"><span class="q-name">Q3 · 7~9월</span><span class="q-pts">${m.q3.points}<span>점</span></span></div>
+            <div class="q-req">${m.q3.req}</div>
+          </div>
+          <div class="q-box q4">
+            <div class="q-head"><span class="q-name">Q4 · 10/1~11/15</span><span class="q-pts">${m.q4.points}<span>점</span></span></div>
+            <div class="q-req">${m.q4.req}</div>
+          </div>
+        </div>
+        ${m.example ? `<div class="hm-example">💡 <strong>예시</strong> — ${m.example}</div>` : ''}
+        ${m.details && m.details.length ? `<ul class="mission-checks">${m.details.map(d => `<li>${d}</li>`).join('')}</ul>` : ''}
       </div>`).join('');
 
     return `
-      <div class="detail-section">
-        <h4>점수 구성 <span class="small">SCORING</span></h4>
-        ${totalHTML}
+      <div class="detail-section h2-section">
+        <h4>🚀 하반기 미션 공지 <span class="small">H2 MISSIONS · Q3·Q4</span></h4>
+        <p class="h2-intro">하반기 미션이 공지되었습니다! 기존 미션은 그대로 이어지고 <strong>환경보호 외부 활동·물품 나눔&amp;기부</strong> 2가지가 새로 추가돼요. 분기(Q3·Q4)별로 획득 점수가 다르니 확인하세요.</p>
+        <div class="missions-list">${h2MissionsHTML}</div>
       </div>
-      <div class="detail-section">
-        <h4>상반기 미션 3가지 <span class="small">H1 MISSIONS</span></h4>
-        <div class="missions-list">${missionsHTML}</div>
-      </div>
+      <details class="detail-section collapse-sec">
+        <summary><span>상반기 미션 3가지 <span class="small">H1 MISSIONS · Q1·Q2 (이미 종료)</span></span></summary>
+        <div class="collapse-body"><div class="missions-list">${missionsHTML}</div></div>
+      </details>
       <div class="detail-section">
         <h4>리워드 로드맵 <span class="small">REWARD ROADMAP</span></h4>
         <div class="roadmap">${roadmapHTML}</div>
       </div>
-      <div class="detail-section h2-section">
-        <h4>🚀 하반기 추가 미션 <span class="small">H2 PREVIEW · 각 40점</span></h4>
-        <p class="h2-intro">하반기에는 일상에서 한 발 더 나아간 미션이 추가됩니다. 점수 쌓을 기회가 더 많아져요!</p>
-        <div class="missions-list">${h2MissionsHTML}</div>
+      <div class="detail-section">
+        <h4>하반기 점수 구성 <span class="small">H2 SCORING · Q3·Q4</span></h4>
+        ${totalHTML}
       </div>
       <div class="callout" style="margin-top: 16px; background: #1F4D2E;">
         <h5 style="color: #B7E4C7;">💚 NEW · 일대일 매칭 기부</h5>
