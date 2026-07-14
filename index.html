@@ -1361,25 +1361,24 @@ window.SITE_DATA = {
     program: "구성원 참여 매칭 펀딩",
     programEn: "Employee Participation Matching Fund",
     year: "2026",
-    lastUpdated: "2026.05.13",
+    lastUpdated: "2026.07.14",
     deptName: "기업발전그룹",
     submitEmail: "gwp@envision.co.kr",
     address: "서울시 금천구 가산디지털2로 98, 1동 603호",
   },
 
-  /* 마라톤 — past/upcoming/tba 상태로 표시됨
-     · 9월 이후 대회를 상단에 배치
-     · 5~6월에 이미 진행된 지난 대회는 status:"tba"로 지정해
-       "공지 예정"과 동일한 회색 톤으로 하단에 표시 */
- marathons: [
+  /* 마라톤 — past:true 인 지난 대회는 접이식 바 안에 표시됨
+     · 다가오는 대회(9월~)를 상단에 날짜순 배치
+     · 이미 진행된 상반기(5~6월) 대회는 past:true 로 지정해 하단 접이식 바에 표시 */
+  marathons: [
     /* ===== 다가오는 기부 마라톤 (9월~) — 날짜순 ===== */
     {
       name: "굿네이버스 레이스 with 띵크어스 2026",
       date: "2026년 9월 예정",
       location: "추후 공지",
       distance: "5km / 10km / 버추얼",
-      status: "tba",
-      tag: "공지 예정",
+      status: "upcoming",
+      tag: "기후위기 취약계층 지원",
       desc: "기부처(굿네이버스) 자체 기부 러닝 캠페인. 참가비 전액 기후위기 취약계층 지원. 2026년 일정 발표 후 업데이트 예정.",
       apply: "—",
       link: "https://www.goodneighbors.kr",
@@ -1463,13 +1462,14 @@ window.SITE_DATA = {
       link: "https://iksangiverun.or.kr/",
     },
 
-    /* ===== 이미 진행된 상반기 대회 (5~6월) — 하단 회색 표시 ===== */
+    /* ===== 이미 진행된 상반기 대회 (5~6월) — past:true → 접이식 바 안에 표시 ===== */
     {
       name: "제7회 런포더문 (RUN for the MOON)",
       date: "2026.05.28 (목) — 세계 월경의 날 기념",
       location: "버추얼런 (앱 참가)",
       distance: "5.28km / 10km",
       status: "tba",
+      past: true,
       tag: "참가비 전액 기부",
       desc: "지파운데이션 주최. 세계 월경의 날을 기념하여 취약계층 여성의 안전한 월경을 응원하는 버추얼 기부런. 슈퍼문 키트 제공.",
       apply: "공식홈 참고",
@@ -1481,6 +1481,7 @@ window.SITE_DATA = {
       location: "전남 여수시 화정면 낭도 (여산 노인정 앞)",
       distance: "10km (여산 노인정 → 조발도 전망대 → 여산 노인정)",
       status: "tba",
+      past: true,
       tag: "1km당 1,500원 기부",
       desc: "여수 백리섬섬길 교량을 달리며 1km당 1,500원이 기부되는 기부런. 셔틀버스 운영, 박람회 티켓·완주메달 등 참가 혜택 제공.",
       apply: "공식홈 참고",
@@ -1492,6 +1493,7 @@ window.SITE_DATA = {
       location: "서울 (공식홈 참고)",
       distance: "5km / 10km",
       status: "tba",
+      past: true,
       tag: "참가비 전액 기부",
       desc: "한국백혈병소아암협회 주최. 참가비 전액이 소아암 치료비로 기부되며, 기부금영수증 발급. (소아암 환아 가정 무료)",
       apply: "~ 2026.05.22 (조기마감 가능)",
@@ -1503,6 +1505,7 @@ window.SITE_DATA = {
       location: "상암 월드컵공원 평화광장",
       distance: "5km / 10km / 하프",
       status: "tba",
+      past: true,
       tag: "상금 전액 기부",
       desc: "수상자 상금이 소외이웃을 위한 기부금으로 사용되는 자선 마라톤.",
       apply: "2026.03.05 ~ 2026.06.14",
@@ -1514,12 +1517,14 @@ window.SITE_DATA = {
       location: "상암 월드컵공원 평화광장",
       distance: "5km / 10km / 하프",
       status: "tba",
+      past: true,
       tag: "자선 마라톤",
       desc: "(사)큰별나눔봉사회 주최. 달리기를 통한 나눔과 봉사의 가치 실천.",
       apply: "~ 2026.06.18",
       link: "https://bigstarrun.kr",
     },
   ],
+
   /* 봉사활동 */
   volunteerPortals: [
     {
@@ -1753,7 +1758,7 @@ window.SITE_DATA = {
 <div class="topbar">
   <div class="container">
     <div class="brand"><span class="dot"></span>ENVISION · DREAM &amp; VISION · CSR PROGRAM</div>
-    <div class="meta" id="meta-updated">최근 업데이트 · 2026.05.12</div>
+    <div class="meta" id="meta-updated">최근 업데이트 · 2026.07.14</div>
   </div>
 </div>
 
@@ -2007,13 +2012,14 @@ window.SITE_DATA = {
 
   // --- 카드별 상세 콘텐츠 ---
   function renderMarathonDetail() {
-    const itemsHTML = D.marathons.map(m => {
+    // 아이템 HTML 생성 함수 (재사용)
+    function marathonItem(m) {
       const statusTag = m.status === 'upcoming'
         ? `<span class="tag${m.recommend ? ' recommend' : ''}">${m.tag || '기부 마라톤'}</span>`
         : m.status === 'tba'
         ? `<span class="tag tba">${m.tag || '공지 예정'}</span>`
         : `<span class="tag past">${m.tag || '지난 대회'}</span>`;
-      const cls = m.status === 'tba' ? ' tba' : m.status === 'past' ? ' past' : '';
+      const cls = m.past ? ' past' : (m.status === 'tba' ? ' tba' : '');
       return `
         <div class="item${cls}">
           <div>
@@ -2030,13 +2036,24 @@ window.SITE_DATA = {
             <a class="item-link" href="${m.link}" target="_blank" rel="noopener">공식 홈페이지 →</a>
           </div>
         </div>`;
-    }).join('');
+    }
+
+    // 다가오는 대회 / 지난 대회(past:true) 구분
+    const upcoming = D.marathons.filter(m => !m.past);
+    const past = D.marathons.filter(m => m.past);
+
+    const upcomingHTML = upcoming.map(marathonItem).join('');
+    const pastHTML = past.map(marathonItem).join('');
 
     return `
       <div class="detail-section">
         <h4>2026 인정 대회 <span class="small">RECOGNIZED EVENTS</span></h4>
-        <div class="item-list">${itemsHTML}</div>
+        <div class="item-list">${upcomingHTML}</div>
       </div>
+      <details class="detail-section collapse-sec">
+        <summary><span>지난 대회 일정 <span class="small">PAST EVENTS · 상반기 (이미 종료)</span></span></summary>
+        <div class="collapse-body"><div class="item-list">${pastHTML}</div></div>
+      </details>
       <div class="callout">
         <h5>📌 참고 사항</h5>
         <ul>
