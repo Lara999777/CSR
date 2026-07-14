@@ -1371,7 +1371,8 @@ window.SITE_DATA = {
      · 9월 이후 대회를 상단에 배치
      · 5~6월에 이미 진행된 지난 대회는 status:"tba"로 지정해
        "공지 예정"과 동일한 회색 톤으로 하단에 표시 */
-  marathons: [
+ marathons: [
+    /* ===== 다가오는 기부 마라톤 (9월~) — 날짜순 ===== */
     {
       name: "굿네이버스 레이스 with 띵크어스 2026",
       date: "2026년 9월 예정",
@@ -1407,6 +1408,39 @@ window.SITE_DATA = {
       link: "https://mara1080.com/event/9443583f-6577-466c-ab2f-43d1dbd820d4",
     },
     {
+      name: "제10회 스마일런페스티벌",
+      date: "2026.09.13 (일)",
+      location: "상암동 평화의공원 평화광장",
+      distance: "하프 / 10km / 5km / 걷기",
+      status: "upcoming",
+      tag: "구강암 환자 후원",
+      desc: "대한치과의사협회·스마일재단 주최. 구강암 환자 지원을 위한 자선 마라톤으로, 입상 시 상금이 기부금영수증으로 발행됨.",
+      apply: "2026.06.29 ~ 2026.07.31 (선착순 조기마감 가능)",
+      link: "https://www.smilerun.co.kr/main/main.php",
+    },
+    {
+      name: "핑크런 마라톤 2026",
+      date: "2026.10.11 (일)",
+      location: "추후 공지 (공식홈 참고)",
+      distance: "공식홈 참고",
+      status: "upcoming",
+      tag: "유방암 인식개선",
+      desc: "유방암 예방·인식 개선 캠페인 마라톤. 참가 수익이 유방암 조기검진·환자 지원 사업에 사용됨. 상세 일정·코스는 공식 홈페이지 확인.",
+      apply: "공식홈 참고",
+      link: "https://www.pinkrun.kr/",
+    },
+    {
+      name: "제10회 산불조심 한국서울마라톤",
+      date: "2026.10.11 (일) 09:00",
+      location: "수서역 광평교 (수서역 5번출구)",
+      distance: "풀 / 31km / 하프 / 10km / 5km",
+      status: "upcoming",
+      tag: "수익금 일부 기부",
+      desc: "한국산악마라톤연맹 주최, 행정안전부·산림청 후원 산불조심 캠페인 마라톤. 대회 수익금 일부가 기부됨.",
+      apply: "2026.01.01 ~ 2026.09.15",
+      link: "http://www.koreatrail.net/home/main.php?link=event&einc=eindex&csno=20190605121808&opp=20260203121910",
+    },
+    {
       name: "세이브더칠드런 국제어린이마라톤",
       date: "2026.10 예정 (아산)",
       location: "전국 순회",
@@ -1417,6 +1451,19 @@ window.SITE_DATA = {
       apply: "공식홈 참고",
       link: "https://www.sc.or.kr/marathon/main.do",
     },
+    {
+      name: "2026 익산 기부런",
+      date: "2026.10.24 (토)",
+      location: "익산시종합운동장",
+      distance: "공식홈 참고",
+      status: "upcoming",
+      tag: "공익 나눔 기부",
+      desc: "익산시종합운동장 평탄한 주로를 달리며 사회적 공익 나눔에 동참하는 기부런.",
+      apply: "2026.07.14 ~ 2026.08.31",
+      link: "https://iksangiverun.or.kr/",
+    },
+
+    /* ===== 이미 진행된 상반기 대회 (5~6월) — 하단 회색 표시 ===== */
     {
       name: "제7회 런포더문 (RUN for the MOON)",
       date: "2026.05.28 (목) — 세계 월경의 날 기념",
@@ -1473,7 +1520,6 @@ window.SITE_DATA = {
       link: "https://bigstarrun.kr",
     },
   ],
-
   /* 봉사활동 */
   volunteerPortals: [
     {
